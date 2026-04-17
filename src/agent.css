@@ -790,17 +790,46 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--fg);
+  background-color: var(--fg);
   z-index: 5;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#agent-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/footer-angel.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+#agent-footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 
 .footer-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   text-align: center;
   padding: 0 40px;
+  z-index: 1;
 }
 
 .footer-label {
