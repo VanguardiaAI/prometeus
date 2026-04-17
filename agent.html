@@ -114,6 +114,655 @@
         <span class="section-label">I. Capabilities</span>
         <h2>Six primitives of an autonomous mind.</h2>
       </header>
+
+      <!-- Capabilities showcase — multi-surface agent demo -->
+      <div class="cap-showcase" id="cap-showcase" aria-hidden="true">
+        <!-- PHONE — WhatsApp chat -->
+        <div class="cap-tile cap-tile-phone" id="cap-phone-wrap">
+          <span class="cap-tile-tag">WhatsApp &middot; mobile</span>
+          <svg
+            class="cap-phone-svg"
+            id="cap-phone"
+            viewBox="0 0 320 640"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="phone-frame" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a3a3d" />
+                <stop offset="50%" stop-color="#1c1c1e" />
+                <stop offset="100%" stop-color="#101012" />
+              </linearGradient>
+              <linearGradient id="phone-bezel" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#505055" />
+                <stop offset="100%" stop-color="#222225" />
+              </linearGradient>
+              <linearGradient id="wa-header-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#202C33" />
+                <stop offset="100%" stop-color="#1A252B" />
+              </linearGradient>
+              <linearGradient id="wa-out-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0A7A62" />
+                <stop offset="100%" stop-color="#005C4B" />
+              </linearGradient>
+              <linearGradient id="wa-in-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#243138" />
+                <stop offset="100%" stop-color="#1F2C34" />
+              </linearGradient>
+              <filter id="phone-shadow" x="-15%" y="-10%" width="130%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="18" />
+                <feOffset dx="0" dy="26" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.28" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <pattern id="wa-wallpaper" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <rect width="28" height="28" fill="#0B141A" />
+                <path d="M6 6 l2 2 M20 18 l2 2 M14 24 l1.5 1.5 M24 4 l1.5 1.5" stroke="rgba(212,165,116,0.04)" stroke-width="0.7" stroke-linecap="round" />
+              </pattern>
+              <clipPath id="wa-chat-clip">
+                <rect x="16" y="106" width="288" height="474" />
+              </clipPath>
+              <clipPath id="phone-screen-clip">
+                <rect x="14" y="14" width="292" height="612" rx="34" />
+              </clipPath>
+            </defs>
+
+            <!-- Outer frame -->
+            <rect x="6" y="6" width="308" height="628" rx="42" fill="url(#phone-bezel)" filter="url(#phone-shadow)" />
+            <rect x="10" y="10" width="300" height="620" rx="38" fill="url(#phone-frame)" />
+            <rect x="13" y="13" width="294" height="614" rx="35" fill="#000" />
+
+            <!-- Side buttons -->
+            <rect x="4" y="110" width="3" height="30" rx="1.5" fill="#2a2a2d" />
+            <rect x="4" y="154" width="3" height="56" rx="1.5" fill="#2a2a2d" />
+            <rect x="4" y="220" width="3" height="56" rx="1.5" fill="#2a2a2d" />
+            <rect x="313" y="140" width="3" height="80" rx="1.5" fill="#2a2a2d" />
+
+            <g clip-path="url(#phone-screen-clip)">
+              <!-- Screen base -->
+              <rect x="14" y="14" width="292" height="612" fill="#0B141A" />
+
+              <!-- Dynamic island -->
+              <rect x="115" y="26" width="90" height="24" rx="12" fill="#000" />
+              <circle cx="195" cy="38" r="3" fill="#1a1a1c" />
+              <circle cx="195" cy="38" r="1.2" fill="#0a0a0c" />
+
+              <!-- Status bar -->
+              <text x="34" y="42" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#fff">9:41</text>
+              <g transform="translate(248 32)">
+                <!-- Signal -->
+                <rect x="0" y="6" width="2.5" height="4" rx="0.5" fill="#fff" />
+                <rect x="4" y="4" width="2.5" height="6" rx="0.5" fill="#fff" />
+                <rect x="8" y="2" width="2.5" height="8" rx="0.5" fill="#fff" />
+                <rect x="12" y="0" width="2.5" height="10" rx="0.5" fill="#fff" />
+                <!-- WiFi -->
+                <path d="M22 7 Q26 3 30 7 M24 9 Q26 7 28 9" stroke="#fff" stroke-width="1.2" fill="none" stroke-linecap="round" />
+                <circle cx="26" cy="10.5" r="0.8" fill="#fff" />
+                <!-- Battery -->
+                <rect x="36" y="2" width="22" height="9" rx="2" stroke="#fff" stroke-width="0.8" fill="none" />
+                <rect x="37.5" y="3.5" width="17" height="6" rx="1" fill="#fff" />
+                <rect x="58.5" y="5" width="1.5" height="3" rx="0.5" fill="#fff" />
+              </g>
+
+              <!-- WhatsApp header -->
+              <rect x="14" y="56" width="292" height="50" fill="url(#wa-header-grad)" />
+              <!-- Back arrow -->
+              <path d="M30 82 l-6 -6 m0 0 l6 -6 m-6 6 h8" stroke="#E9EDEF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              <!-- Avatar -->
+              <circle cx="58" cy="81" r="16" fill="#D4A574" />
+              <text x="58" y="87" text-anchor="middle" font-family="'Playfair Display', serif" font-style="italic" font-size="17" font-weight="700" fill="#1A252B">P</text>
+              <circle cx="69" cy="90" r="4" fill="#00A884" stroke="#1A252B" stroke-width="1.5" />
+              <!-- Contact info -->
+              <text x="82" y="78" font-family="'Inter', sans-serif" font-size="13.5" font-weight="500" fill="#E9EDEF">Prometeus</text>
+              <text x="82" y="93" font-family="'Inter', sans-serif" font-size="10.5" fill="#8696A0">online &middot; always</text>
+              <!-- Action icons -->
+              <g transform="translate(232 72)" fill="none" stroke="#AEBAC1" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0 0 h14 v10 h-14 z M14 3 l5 -3 v10 l-5 -3 z" />
+              </g>
+              <g transform="translate(264 74)" fill="none" stroke="#AEBAC1" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 5 q2 -4 6 -4 q1 0 2 0.5 l2 3 l-2 2 q1 2 2.5 3.5 q1.5 1.5 3.5 2.5 l2 -2 l3 2 q0.5 1 0.5 2 q0 4 -4 6 q-9 0 -16 -16 z" />
+              </g>
+              <circle cx="291" cy="80" r="1.2" fill="#AEBAC1" />
+              <circle cx="291" cy="85" r="1.2" fill="#AEBAC1" />
+              <circle cx="291" cy="90" r="1.2" fill="#AEBAC1" />
+
+              <!-- Chat body wallpaper -->
+              <g clip-path="url(#wa-chat-clip)">
+                <rect x="16" y="106" width="288" height="474" fill="url(#wa-wallpaper)" />
+
+                <!-- Encryption notice -->
+                <g class="wa-line wa-l0" transform="translate(60 122)">
+                  <rect width="192" height="30" rx="4" fill="rgba(31,44,52,0.55)" />
+                  <text x="96" y="14" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#8696A0">
+                    <tspan fill="#D4A574">&#128274;</tspan>
+                    <tspan dx="4">Messages are end-to-end encrypted.</tspan>
+                  </text>
+                  <text x="96" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8" fill="#8696A0">Tap to learn more.</text>
+                </g>
+
+                <!-- Date separator -->
+                <g class="wa-line wa-l1" transform="translate(130 160)">
+                  <rect width="52" height="20" rx="10" fill="rgba(31,44,52,0.65)" />
+                  <text x="26" y="13" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#8696A0">TODAY</text>
+                </g>
+
+                <!-- Outgoing message 1 -->
+                <g class="wa-line wa-l2">
+                  <path d="M98 192 h184 a6 6 0 0 1 6 6 v26 a6 6 0 0 1 -6 6 h-180 l-6 6 v-38 a6 6 0 0 1 2 -6 z" fill="url(#wa-out-grad)" />
+                  <text x="108" y="210" font-family="'Inter', sans-serif" font-size="11" fill="#E9EDEF">what&#8217;s on my calendar tomorrow?</text>
+                  <text x="262" y="224" font-family="'Inter', sans-serif" font-size="8.5" fill="rgba(233,237,239,0.5)">9:41</text>
+                  <path d="M274 220 l2 2 l5 -5 M278 220 l2 2 l5 -5" stroke="#53BDEB" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+
+                <!-- Typing indicator -->
+                <g class="wa-line wa-typing">
+                  <path d="M28 252 h56 a6 6 0 0 1 6 6 v18 a6 6 0 0 1 -6 6 h-52 l-6 6 v-30 a6 6 0 0 1 2 -6 z" fill="url(#wa-in-grad)" />
+                  <circle cx="42" cy="267" r="2.5" fill="#8696A0">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="267;264;267" dur="1.2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="54" cy="267" r="2.5" fill="#8696A0">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" begin="0.2s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="267;264;267" dur="1.2s" begin="0.2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="66" cy="267" r="2.5" fill="#8696A0">
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" begin="0.4s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="267;264;267" dur="1.2s" begin="0.4s" repeatCount="indefinite" />
+                  </circle>
+                </g>
+
+                <!-- Incoming briefing -->
+                <g class="wa-line wa-l3">
+                  <path d="M28 304 h236 a6 6 0 0 1 6 6 v96 a6 6 0 0 1 -6 6 h-232 l-6 6 v-108 a6 6 0 0 1 2 -6 z" fill="url(#wa-in-grad)" />
+                  <text x="40" y="322" font-family="'Inter', sans-serif" font-size="10.5" font-weight="500" fill="#D4A574">Tomorrow &middot; 3 meetings</text>
+                  <line x1="40" y1="330" x2="258" y2="330" stroke="rgba(212,165,116,0.18)" stroke-width="0.5" />
+                  <text x="40" y="346" font-family="'Inter', sans-serif" font-size="10.5" fill="#E9EDEF">
+                    <tspan fill="#8696A0">10:00</tspan>
+                    <tspan dx="6">Team sync</tspan>
+                  </text>
+                  <text x="40" y="362" font-family="'Inter', sans-serif" font-size="10.5" fill="#E9EDEF">
+                    <tspan fill="#8696A0">14:00</tspan>
+                    <tspan dx="6">Client call &middot; Acme</tspan>
+                  </text>
+                  <text x="40" y="378" font-family="'Inter', sans-serif" font-size="10.5" fill="#E9EDEF">
+                    <tspan fill="#8696A0">16:00</tspan>
+                    <tspan dx="6">Architecture review</tspan>
+                  </text>
+                  <text x="40" y="398" font-family="'Inter', sans-serif" font-size="10" fill="#8696A0" font-style="italic">Want a daily briefing at 8am?</text>
+                  <text x="246" y="410" font-family="'Inter', sans-serif" font-size="8.5" fill="rgba(233,237,239,0.4)">9:41</text>
+                </g>
+
+                <!-- Outgoing — Yes -->
+                <g class="wa-line wa-l4">
+                  <path d="M198 430 h84 a6 6 0 0 1 6 6 v20 a6 6 0 0 1 -6 6 h-80 l-6 6 v-32 a6 6 0 0 1 2 -6 z" fill="url(#wa-out-grad)" />
+                  <text x="208" y="448" font-family="'Inter', sans-serif" font-size="11" fill="#E9EDEF">Yes, daily &#128170;</text>
+                  <text x="262" y="460" font-family="'Inter', sans-serif" font-size="8.5" fill="rgba(233,237,239,0.5)">9:42</text>
+                  <path d="M274 456 l2 2 l5 -5 M278 456 l2 2 l5 -5" stroke="#53BDEB" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+
+                <!-- Incoming — confirmation -->
+                <g class="wa-line wa-l5">
+                  <path d="M28 484 h210 a6 6 0 0 1 6 6 v46 a6 6 0 0 1 -6 6 h-206 l-6 6 v-58 a6 6 0 0 1 2 -6 z" fill="url(#wa-in-grad)" />
+                  <text x="40" y="504" font-family="'Inter', sans-serif" font-size="10.5" fill="#E9EDEF">
+                    Scheduled
+                    <tspan fill="#00A884">&#10003;</tspan>
+                  </text>
+                  <text x="40" y="520" font-family="'Inter', sans-serif" font-size="10" fill="#8696A0">
+                    <tspan fill="#D4A574">cron</tspan>
+                    <tspan dx="6">0 8 * * *</tspan>
+                    <tspan dx="6" fill="rgba(233,237,239,0.4)">&middot;</tspan>
+                    <tspan dx="6">next 14h 07m</tspan>
+                  </text>
+                  <text x="40" y="534" font-family="'Inter', sans-serif" font-size="9.5" fill="#8696A0" font-style="italic">I&#8217;ll remember your timezone.</text>
+                  <text x="222" y="544" font-family="'Inter', sans-serif" font-size="8.5" fill="rgba(233,237,239,0.4)">9:42</text>
+                </g>
+              </g>
+
+              <!-- Input bar -->
+              <rect x="14" y="580" width="292" height="46" fill="#1A252B" />
+              <rect x="24" y="590" width="216" height="28" rx="14" fill="#2A3942" />
+              <g transform="translate(32 598)" fill="none" stroke="#8696A0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="5.2" />
+                <circle cx="4" cy="5" r="0.6" fill="#8696A0" />
+                <circle cx="8" cy="5" r="0.6" fill="#8696A0" />
+                <path d="M3 8 q3 2 6 0" />
+              </g>
+              <text x="50" y="609" font-family="'Inter', sans-serif" font-size="11" fill="#8696A0">Message</text>
+              <g transform="translate(218 600)" fill="none" stroke="#8696A0" stroke-width="1.3" stroke-linecap="round">
+                <path d="M0 4 h10 M3 0 l-3 4 l3 4" />
+              </g>
+              <circle cx="274" cy="603" r="16" fill="#00A884" />
+              <g transform="translate(268 597)" fill="#fff">
+                <path d="M0 6 l3 3 l9 -9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M0 6 L12 0 L7 12 L5.5 7.5 Z" opacity="0" />
+                <path d="M0 0 L12 6 L0 12 L3 6 Z" transform="translate(-1 0)" />
+              </g>
+
+              <!-- Home indicator -->
+              <rect x="116" y="618" width="88" height="4" rx="2" fill="#fff" opacity="0.8" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- CLI CONSOLE — live multi-channel logs -->
+        <div class="cap-tile cap-tile-cli" id="cap-cli-wrap">
+          <span class="cap-tile-tag">CLI &middot; gateway live</span>
+          <svg
+            class="cap-cli-svg"
+            id="cap-cli"
+            viewBox="0 0 560 340"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="cli-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1b1917" />
+                <stop offset="100%" stop-color="#0c0b0a" />
+              </linearGradient>
+              <linearGradient id="cli-chrome" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#26231f" />
+                <stop offset="100%" stop-color="#1a1815" />
+              </linearGradient>
+              <filter id="cli-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="14" />
+                <feOffset dx="0" dy="18" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="cli-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.3" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <pattern id="cli-scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+                <rect width="3" height="1" fill="rgba(255,255,255,0.013)" />
+              </pattern>
+              <clipPath id="cli-body-clip">
+                <rect x="12" y="44" width="536" height="288" />
+              </clipPath>
+            </defs>
+
+            <rect x="12" y="12" width="536" height="316" rx="10" fill="url(#cli-bg)" filter="url(#cli-shadow)" />
+            <path d="M12 22 A10 10 0 0 1 22 12 L538 12 A10 10 0 0 1 548 22 L548 44 L12 44 Z" fill="url(#cli-chrome)" />
+            <line x1="12" y1="44" x2="548" y2="44" stroke="rgba(212,165,116,0.12)" stroke-width="0.5" />
+
+            <!-- Traffic lights -->
+            <circle cx="30" cy="28" r="4.5" fill="#ff5f57" />
+            <circle cx="45" cy="28" r="4.5" fill="#febc2e" />
+            <circle cx="60" cy="28" r="4.5" fill="#28c841" />
+
+            <!-- Title -->
+            <text x="280" y="32" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.42)">
+              pablo<tspan fill="rgba(212,165,116,0.55)">@</tspan>prometeus &#8212; prometeus logs --follow
+            </text>
+
+            <!-- Live indicator -->
+            <g transform="translate(520 28)">
+              <circle r="3" fill="#28c841">
+                <animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle r="5.5" fill="none" stroke="#28c841" stroke-opacity="0.4">
+                <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.45;0;0.45" dur="2s" repeatCount="indefinite" />
+              </circle>
+            </g>
+
+            <rect x="12" y="44" width="536" height="288" fill="url(#cli-scan)" />
+
+            <g clip-path="url(#cli-body-clip)" font-family="'Geist Mono', ui-monospace, monospace">
+              <!-- Line 1: command -->
+              <g class="c-line c-l1">
+                <text x="28" y="72" font-size="12">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="rgba(255,255,255,0.38)" dx="6">~/prometeus</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <text x="160" y="72" font-size="12" fill="rgba(255,255,255,0.92)" class="c-typed c-typed-1">prometeus logs --follow</text>
+              </g>
+
+              <!-- Header -->
+              <g class="c-line c-l2">
+                <text x="28" y="94" font-size="10" fill="rgba(212,165,116,0.5)" letter-spacing="1.3">TIME  &middot;  CHANNEL  &middot;  FROM  &middot;  EVENT</text>
+                <line x1="28" y1="100" x2="528" y2="100" stroke="rgba(212,165,116,0.18)" stroke-dasharray="2 4" />
+              </g>
+
+              <!-- Event rows -->
+              <g class="c-line c-l3">
+                <text x="28" y="120" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:07</tspan>
+                  <tspan dx="10" fill="#D4A574">[telegram]</tspan>
+                  <tspan dx="10" fill="#E9EDEF">&#8594; pablo</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.65)" font-style="italic">&ldquo;daily briefing at 8am&rdquo;</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l4">
+                <text x="28" y="140" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:07</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.8)">[router]</tspan>
+                  <tspan dx="24" fill="rgba(255,255,255,0.55)">intent</tspan>
+                  <tspan dx="10" fill="#E9EDEF">scheduler.create</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.4)">conf 0.97</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l5">
+                <text x="28" y="160" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:08</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.8)">[memory]</tspan>
+                  <tspan dx="18" fill="rgba(255,255,255,0.55)">write</tspan>
+                  <tspan dx="10" fill="#E9EDEF">user.preferences/briefing</tspan>
+                  <tspan dx="8" fill="#28c841">ok</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l6">
+                <text x="28" y="180" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:08</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.8)">[skills]</tspan>
+                  <tspan dx="28" fill="rgba(255,255,255,0.55)">bind</tspan>
+                  <tspan dx="10" fill="#E9EDEF">cron(&#8220;0 8 * * *&#8221;)</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.4)">id#417</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l7">
+                <text x="28" y="200" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:09</tspan>
+                  <tspan dx="10" fill="#D4A574">[whatsapp]</tspan>
+                  <tspan dx="10" fill="#E9EDEF">&#8592; pablo</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.65)" font-style="italic">&ldquo;Scheduled &#10003; next 14h 07m&rdquo;</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l8">
+                <text x="28" y="220" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:12</tspan>
+                  <tspan dx="10" fill="#D4A574">[slack]</tspan>
+                  <tspan dx="26" fill="#E9EDEF">&#8594; #eng</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.65)" font-style="italic">&ldquo;deploy prod?&rdquo;</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l9">
+                <text x="28" y="240" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:13</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.8)">[tools]</tspan>
+                  <tspan dx="30" fill="rgba(255,255,255,0.55)">exec</tspan>
+                  <tspan dx="10" fill="#E9EDEF">github.deploy</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.4)">sha a7f2c1</tspan>
+                </text>
+              </g>
+              <g class="c-line c-l10">
+                <text x="28" y="260" font-size="11">
+                  <tspan fill="rgba(255,255,255,0.45)">09:41:18</tspan>
+                  <tspan dx="10" fill="#D4A574">[discord]</tspan>
+                  <tspan dx="12" fill="#E9EDEF">&#8592; @team</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.65)" font-style="italic">&ldquo;shipped &#10003; build 2.1m&rdquo;</tspan>
+                </text>
+              </g>
+
+              <!-- Throughput meter -->
+              <g class="c-line c-l11" transform="translate(28 278)">
+                <text x="0" y="10" font-size="10" fill="rgba(212,165,116,0.55)" letter-spacing="1.2">THROUGHPUT</text>
+                <rect x="100" y="3" width="280" height="5" rx="2.5" fill="rgba(255,255,255,0.05)" />
+                <rect class="c-tp-bar" x="100" y="3" width="0" height="5" rx="2.5" fill="#D4A574" filter="url(#cli-glow)" />
+                <text class="c-tp-label" x="392" y="10" font-size="10" fill="#D4A574">0 ev/s</text>
+              </g>
+
+              <!-- Prompt w/ cursor -->
+              <g class="c-line c-l12">
+                <text x="28" y="308" font-size="12">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="rgba(255,255,255,0.38)" dx="6">~/prometeus</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <rect class="c-cursor" x="158" y="298" width="7" height="13" fill="#D4A574" filter="url(#cli-glow)">
+                  <animate attributeName="opacity" values="1;1;0;0" dur="1.05s" keyTimes="0;0.5;0.5;1" repeatCount="indefinite" />
+                </rect>
+              </g>
+            </g>
+
+            <rect x="12.5" y="12.5" width="535" height="315" rx="9.5" fill="none" stroke="rgba(212,165,116,0.14)" stroke-width="0.5" pointer-events="none" />
+          </svg>
+        </div>
+
+        <!-- CRON BASH — scheduler -->
+        <div class="cap-tile cap-tile-cron" id="cap-cron-wrap">
+          <span class="cap-tile-tag">bash &middot; natural-language cron</span>
+          <svg
+            class="cap-cron-svg"
+            id="cap-cron"
+            viewBox="0 0 560 340"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="cron-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1b1917" />
+                <stop offset="100%" stop-color="#0c0b0a" />
+              </linearGradient>
+              <linearGradient id="cron-chrome" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#26231f" />
+                <stop offset="100%" stop-color="#1a1815" />
+              </linearGradient>
+              <filter id="cron-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="14" />
+                <feOffset dx="0" dy="18" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="cron-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.3" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <pattern id="cron-scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+                <rect width="3" height="1" fill="rgba(255,255,255,0.013)" />
+              </pattern>
+              <clipPath id="cron-body-clip">
+                <rect x="12" y="44" width="536" height="288" />
+              </clipPath>
+            </defs>
+
+            <rect x="12" y="12" width="536" height="316" rx="10" fill="url(#cron-bg)" filter="url(#cron-shadow)" />
+            <path d="M12 22 A10 10 0 0 1 22 12 L538 12 A10 10 0 0 1 548 22 L548 44 L12 44 Z" fill="url(#cron-chrome)" />
+            <line x1="12" y1="44" x2="548" y2="44" stroke="rgba(212,165,116,0.12)" stroke-width="0.5" />
+
+            <circle cx="30" cy="28" r="4.5" fill="#ff5f57" />
+            <circle cx="45" cy="28" r="4.5" fill="#febc2e" />
+            <circle cx="60" cy="28" r="4.5" fill="#28c841" />
+
+            <text x="280" y="32" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="10" letter-spacing="1.5" fill="rgba(255,255,255,0.42)">
+              pablo<tspan fill="rgba(212,165,116,0.55)">@</tspan>prometeus &#8212; bash &#8212; scheduler
+            </text>
+
+            <!-- Tab -->
+            <g transform="translate(456 18)">
+              <rect width="80" height="18" rx="3" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="0.5" />
+              <circle cx="10" cy="9" r="2" fill="#28c841">
+                <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+              </circle>
+              <text x="46" y="12" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="9" fill="rgba(255,255,255,0.6)">scheduler</text>
+            </g>
+
+            <rect x="12" y="44" width="536" height="288" fill="url(#cron-scan)" />
+
+            <g clip-path="url(#cron-body-clip)" font-family="'Geist Mono', ui-monospace, monospace">
+              <!-- L1 command -->
+              <g class="cr-line cr-l1">
+                <text x="28" y="68" font-size="12">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <text x="52" y="68" font-size="12" fill="rgba(255,255,255,0.92)" class="cr-typed cr-typed-1">prometeus cron list</text>
+              </g>
+
+              <!-- Table header -->
+              <g class="cr-line cr-l2">
+                <text x="28" y="90" font-size="10" letter-spacing="1.2" fill="rgba(212,165,116,0.55)">
+                  <tspan>ID</tspan>
+                  <tspan x="72">EXPR</tspan>
+                  <tspan x="220">NEXT</tspan>
+                  <tspan x="312">DESCRIPTION</tspan>
+                </text>
+                <line x1="28" y1="96" x2="528" y2="96" stroke="rgba(212,165,116,0.18)" stroke-dasharray="2 4" />
+              </g>
+
+              <!-- Table rows -->
+              <g class="cr-line cr-l3">
+                <text x="28" y="114" font-size="11" fill="rgba(255,255,255,0.82)">
+                  <tspan fill="rgba(255,255,255,0.5)">#417</tspan>
+                  <tspan x="72" fill="#D4A574">0 8 * * *</tspan>
+                  <tspan x="220" fill="rgba(255,255,255,0.75)">14h 07m</tspan>
+                  <tspan x="312" fill="rgba(255,255,255,0.82)" font-style="italic">Daily briefing &middot; WhatsApp</tspan>
+                </text>
+              </g>
+              <g class="cr-line cr-l4">
+                <text x="28" y="132" font-size="11" fill="rgba(255,255,255,0.82)">
+                  <tspan fill="rgba(255,255,255,0.5)">#418</tspan>
+                  <tspan x="72" fill="#D4A574">*/15 * * * *</tspan>
+                  <tspan x="220" fill="rgba(255,255,255,0.75)">03m 22s</tspan>
+                  <tspan x="312" fill="rgba(255,255,255,0.82)" font-style="italic">Inbox digest &middot; email</tspan>
+                </text>
+              </g>
+              <g class="cr-line cr-l5">
+                <text x="28" y="150" font-size="11" fill="rgba(255,255,255,0.82)">
+                  <tspan fill="rgba(255,255,255,0.5)">#419</tspan>
+                  <tspan x="72" fill="#D4A574">0 */2 * * 1-5</tspan>
+                  <tspan x="220" fill="rgba(255,255,255,0.75)">47m 10s</tspan>
+                  <tspan x="312" fill="rgba(255,255,255,0.82)" font-style="italic">Market pulse &middot; telegram</tspan>
+                </text>
+              </g>
+              <g class="cr-line cr-l6">
+                <text x="28" y="168" font-size="11" fill="rgba(255,255,255,0.82)">
+                  <tspan fill="rgba(255,255,255,0.5)">#420</tspan>
+                  <tspan x="72" fill="#D4A574">30 18 * * 5</tspan>
+                  <tspan x="220" fill="rgba(255,255,255,0.75)">4d 09h</tspan>
+                  <tspan x="312" fill="rgba(255,255,255,0.82)" font-style="italic">Weekly roundup &middot; Slack</tspan>
+                </text>
+              </g>
+
+              <!-- Add command -->
+              <g class="cr-line cr-l7">
+                <text x="28" y="198" font-size="12">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <text x="52" y="198" font-size="12" fill="rgba(255,255,255,0.92)" class="cr-typed cr-typed-2">prometeus cron add &ldquo;call mom every sunday at 7pm&rdquo;</text>
+              </g>
+
+              <!-- Parsing -->
+              <g class="cr-line cr-l8">
+                <text x="28" y="220" font-size="11" fill="rgba(255,255,255,0.55)">
+                  <tspan fill="rgba(212,165,116,0.7)">&middot;</tspan>
+                  <tspan dx="8">parsing natural language</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.35)">&hellip;</tspan>
+                </text>
+              </g>
+
+              <!-- Box: NL -> cron -->
+              <g class="cr-line cr-l9" transform="translate(28 232)">
+                <rect width="500" height="46" rx="5" fill="rgba(212,165,116,0.05)" stroke="rgba(212,165,116,0.28)" stroke-width="0.6" />
+                <text x="14" y="18" font-size="10" fill="rgba(212,165,116,0.65)" letter-spacing="1">INPUT</text>
+                <text x="64" y="18" font-size="11" fill="rgba(255,255,255,0.8)" font-style="italic">&ldquo;call mom every sunday at 7pm&rdquo;</text>
+                <line x1="14" y1="24" x2="486" y2="24" stroke="rgba(212,165,116,0.12)" />
+                <text x="14" y="38" font-size="10" fill="rgba(212,165,116,0.65)" letter-spacing="1">CRON</text>
+                <text x="64" y="38" font-size="11" fill="#D4A574" font-family="'Geist Mono', ui-monospace, monospace">0 19 * * 0</text>
+                <text x="200" y="38" font-size="10" fill="rgba(255,255,255,0.5)">&middot;</text>
+                <text x="214" y="38" font-size="11" fill="rgba(255,255,255,0.75)">sunday 19:00</text>
+                <text x="320" y="38" font-size="10" fill="rgba(255,255,255,0.5)">&middot;</text>
+                <text x="334" y="38" font-size="11" fill="rgba(255,255,255,0.75)">timezone Europe/Madrid</text>
+              </g>
+
+              <!-- Confirmation line -->
+              <g class="cr-line cr-l10">
+                <text x="28" y="294" font-size="11">
+                  <tspan fill="#28c841">&#10003;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.75)">saved as</tspan>
+                  <tspan dx="6" fill="#D4A574">#421</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.5)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.65)">next run in</tspan>
+                  <tspan dx="6" fill="#D4A574" class="cr-countdown">3d 9h 18m</tspan>
+                </text>
+              </g>
+
+              <!-- Final prompt + cursor -->
+              <g class="cr-line cr-l11">
+                <text x="28" y="318" font-size="12">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <rect class="cr-cursor" x="54" y="308" width="7" height="13" fill="#D4A574" filter="url(#cron-glow)">
+                  <animate attributeName="opacity" values="1;1;0;0" dur="1.05s" keyTimes="0;0.5;0.5;1" repeatCount="indefinite" />
+                </rect>
+              </g>
+            </g>
+
+            <rect x="12.5" y="12.5" width="535" height="315" rx="9.5" fill="none" stroke="rgba(212,165,116,0.14)" stroke-width="0.5" pointer-events="none" />
+          </svg>
+        </div>
+
+        <!-- FLOATING WA NOTIFICATION -->
+        <div class="cap-tile cap-tile-msg" id="cap-msg-wrap">
+          <svg
+            class="cap-msg-svg"
+            id="cap-msg"
+            viewBox="0 0 320 118"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="msg-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#222D33" />
+                <stop offset="100%" stop-color="#161E23" />
+              </linearGradient>
+              <linearGradient id="msg-accent" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#00A884" />
+                <stop offset="100%" stop-color="#0A7A62" />
+              </linearGradient>
+              <filter id="msg-shadow" x="-10%" y="-10%" width="120%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="10" />
+                <feOffset dx="0" dy="14" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="msg-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Accent bar -->
+            <rect x="8" y="10" width="4" height="98" rx="2" fill="url(#msg-accent)" filter="url(#msg-glow)" />
+
+            <!-- Card body -->
+            <rect x="12" y="8" width="300" height="102" rx="14" fill="url(#msg-bg)" filter="url(#msg-shadow)" />
+            <rect x="12.5" y="8.5" width="299" height="101" rx="13.5" fill="none" stroke="rgba(212,165,116,0.18)" stroke-width="0.5" />
+
+            <!-- WhatsApp mark -->
+            <g transform="translate(30 28)">
+              <circle r="14" fill="#00A884" />
+              <path d="M-7 7 q-1 -3 0 -6 q2 -6 8 -6 q6 0 8 5 q2 4 -1 8 q-3 4 -8 3 l-6 1 l2 -5 z" fill="#fff" />
+              <path d="M-3 2 q1 3 3 5 q2 2 5 3 l2 -1 l-2 -2 l-2 1 q-2 -1 -3 -2 q-1 -1 -2 -3 l1 -2 l-2 -2 l-1 1 q0 1 1 2 z" fill="#00A884" />
+            </g>
+
+            <!-- Contact + timestamp -->
+            <text x="54" y="28" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#E9EDEF">Prometeus</text>
+            <circle cx="124" cy="25" r="2.5" fill="#00A884" />
+            <text x="132" y="28" font-family="'Inter', sans-serif" font-size="10.5" fill="#8696A0">online</text>
+            <text x="294" y="28" text-anchor="end" font-family="'Inter', sans-serif" font-size="10" fill="#8696A0">now</text>
+
+            <!-- Message preview -->
+            <text x="54" y="52" font-family="'Inter', sans-serif" font-size="12.5" fill="#E9EDEF">Daily briefing ready
+              <tspan fill="#D4A574" dx="3">&#9749;</tspan>
+            </text>
+            <text x="54" y="70" font-family="'Inter', sans-serif" font-size="11.5" fill="#8696A0">
+              3 meetings &middot; 17 emails &middot; 2 deploys
+            </text>
+
+            <!-- Bottom row -->
+            <line x1="30" y1="82" x2="294" y2="82" stroke="rgba(212,165,116,0.1)" stroke-dasharray="1 3" />
+            <text x="30" y="99" font-family="'Geist Mono', ui-monospace, monospace" font-size="9" letter-spacing="1.2" fill="rgba(212,165,116,0.7)">TAP TO OPEN</text>
+            <g transform="translate(280 93)" class="msg-arrow">
+              <path d="M0 0 l6 4 l-6 4" stroke="#D4A574" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
       <ol class="cap-list">
         <li class="cap-item">
           <span class="cap-num">01</span>

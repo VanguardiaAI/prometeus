@@ -606,6 +606,252 @@ function initQuickStartTerminalAnimation() {
 initArchTerminalAnimation()
 initQuickStartTerminalAnimation()
 
+// --- Capabilities showcase: WhatsApp phone ---
+function initCapPhoneAnimation() {
+  const phone = document.getElementById('cap-phone')
+  if (!phone) return
+
+  const waLines = ['.wa-l0', '.wa-l1', '.wa-l2', '.wa-l3', '.wa-l4', '.wa-l5']
+  waLines.forEach((sel) => gsap.set(`#cap-phone ${sel}`, { opacity: 0, y: 10 }))
+  gsap.set('#cap-phone .wa-typing', { opacity: 0 })
+
+  const tl = gsap.timeline({
+    paused: true,
+    repeat: -1,
+    repeatDelay: 4,
+    defaults: { ease: 'power2.out' },
+  })
+
+  tl.to('#cap-phone .wa-l0', { opacity: 1, y: 0, duration: 0.45 }, 0.1)
+    .to('#cap-phone .wa-l1', { opacity: 1, y: 0, duration: 0.35 }, '+=0.35')
+    .to('#cap-phone .wa-l2', { opacity: 1, y: 0, duration: 0.45 }, '+=0.4')
+    .to('#cap-phone .wa-typing', { opacity: 1, duration: 0.3 }, '+=0.5')
+    .to('#cap-phone .wa-typing', { opacity: 0, duration: 0.3 }, '+=1.6')
+    .to('#cap-phone .wa-l3', { opacity: 1, y: 0, duration: 0.55 }, '<0.1')
+    .to('#cap-phone .wa-l4', { opacity: 1, y: 0, duration: 0.45 }, '+=0.9')
+    .to('#cap-phone .wa-typing', { opacity: 1, duration: 0.3 }, '+=0.5')
+    .to('#cap-phone .wa-typing', { opacity: 0, duration: 0.3 }, '+=1.2')
+    .to('#cap-phone .wa-l5', { opacity: 1, y: 0, duration: 0.5 }, '<0.1')
+    .to({}, { duration: 2.5 })
+    .to(
+      waLines.map((s) => `#cap-phone ${s}`),
+      {
+        opacity: 0,
+        y: -6,
+        duration: 0.5,
+        ease: 'power2.in',
+        stagger: { amount: 0.3, from: 'start' },
+      },
+    )
+
+  ScrollTrigger.create({
+    trigger: '#cap-showcase',
+    start: 'top 85%',
+    end: 'bottom 10%',
+    onEnter: () => tl.play(),
+    onEnterBack: () => tl.play(),
+    onLeave: () => tl.pause(),
+    onLeaveBack: () => tl.pause(),
+  })
+}
+
+// --- Capabilities showcase: CLI console ---
+function initCapCliAnimation() {
+  const cli = document.getElementById('cap-cli')
+  if (!cli) return
+
+  const cLines = ['.c-l1', '.c-l2', '.c-l3', '.c-l4', '.c-l5', '.c-l6', '.c-l7', '.c-l8', '.c-l9', '.c-l10', '.c-l11', '.c-l12']
+  cLines.forEach((sel) => gsap.set(`#cap-cli ${sel}`, { opacity: 0 }))
+  gsap.set('#cap-cli .c-tp-bar', { attr: { width: 0 } })
+
+  const typedEl = cli.querySelector('.c-typed-1') as SVGTextElement | null
+  if (typedEl) typedEl.textContent = ''
+
+  const tpLabel = cli.querySelector('.c-tp-label') as SVGTextElement | null
+
+  const tl = gsap.timeline({
+    paused: true,
+    repeat: -1,
+    repeatDelay: 3,
+    defaults: { ease: 'power2.out' },
+  })
+
+  tl.to('#cap-cli .c-l1', { opacity: 1, duration: 0.35 })
+    .add(typewrite('#cap-cli .c-typed-1', 'prometeus logs --follow'), '>')
+    .to('#cap-cli .c-l2', { opacity: 1, duration: 0.35 }, '+=0.15')
+
+  // Events stream in, staggered
+  tl.to(
+    ['#cap-cli .c-l3', '#cap-cli .c-l4', '#cap-cli .c-l5', '#cap-cli .c-l6', '#cap-cli .c-l7', '#cap-cli .c-l8', '#cap-cli .c-l9', '#cap-cli .c-l10'],
+    { opacity: 1, duration: 0.3, stagger: 0.22 },
+    '+=0.2',
+  )
+
+  // Throughput bar
+  tl.to('#cap-cli .c-l11', { opacity: 1, duration: 0.4 }, '+=0.2')
+  const tpProxy = { p: 0 }
+  tl.to(tpProxy, {
+    p: 1,
+    duration: 1.5,
+    ease: 'power1.inOut',
+    onUpdate: () => {
+      gsap.set('#cap-cli .c-tp-bar', { attr: { width: 280 * tpProxy.p } })
+      if (tpLabel) tpLabel.textContent = `${(tpProxy.p * 12.4).toFixed(1)} ev/s`
+    },
+  }, '<')
+
+  tl.to('#cap-cli .c-l12', { opacity: 1, duration: 0.35 }, '+=0.3')
+
+  tl.to({}, { duration: 2.5 })
+  tl.to(cLines.map((s) => `#cap-cli ${s}`), {
+    opacity: 0,
+    duration: 0.5,
+    ease: 'power2.in',
+    stagger: { amount: 0.25, from: 'start' },
+    onComplete: () => {
+      if (typedEl) typedEl.textContent = ''
+      gsap.set('#cap-cli .c-tp-bar', { attr: { width: 0 } })
+      if (tpLabel) tpLabel.textContent = '0 ev/s'
+    },
+  })
+
+  ScrollTrigger.create({
+    trigger: '#cap-showcase',
+    start: 'top 85%',
+    end: 'bottom 10%',
+    onEnter: () => tl.play(),
+    onEnterBack: () => tl.play(),
+    onLeave: () => tl.pause(),
+    onLeaveBack: () => tl.pause(),
+  })
+}
+
+// --- Capabilities showcase: cron bash ---
+function initCapCronAnimation() {
+  const cron = document.getElementById('cap-cron')
+  if (!cron) return
+
+  const crLines = ['.cr-l1', '.cr-l2', '.cr-l3', '.cr-l4', '.cr-l5', '.cr-l6', '.cr-l7', '.cr-l8', '.cr-l9', '.cr-l10', '.cr-l11']
+  crLines.forEach((sel) => gsap.set(`#cap-cron ${sel}`, { opacity: 0 }))
+
+  const typed1 = cron.querySelector('.cr-typed-1') as SVGTextElement | null
+  const typed2 = cron.querySelector('.cr-typed-2') as SVGTextElement | null
+  if (typed1) typed1.textContent = ''
+  if (typed2) typed2.textContent = ''
+
+  const countdown = cron.querySelector('.cr-countdown') as SVGTextElement | null
+
+  const tl = gsap.timeline({
+    paused: true,
+    repeat: -1,
+    repeatDelay: 3,
+    defaults: { ease: 'power2.out' },
+  })
+
+  tl.to('#cap-cron .cr-l1', { opacity: 1, duration: 0.35 })
+    .add(typewrite('#cap-cron .cr-typed-1', 'prometeus cron list'), '>')
+    .to('#cap-cron .cr-l2', { opacity: 1, duration: 0.3 }, '+=0.15')
+
+  tl.to(
+    ['#cap-cron .cr-l3', '#cap-cron .cr-l4', '#cap-cron .cr-l5', '#cap-cron .cr-l6'],
+    { opacity: 1, duration: 0.3, stagger: 0.18 },
+    '+=0.1',
+  )
+
+  tl.to('#cap-cron .cr-l7', { opacity: 1, duration: 0.35 }, '+=0.35')
+    .add(typewrite('#cap-cron .cr-typed-2', 'prometeus cron add "call mom every sunday at 7pm"'), '>')
+
+  tl.to('#cap-cron .cr-l8', { opacity: 1, duration: 0.35 }, '+=0.2')
+    .to('#cap-cron .cr-l9', { opacity: 1, duration: 0.5 }, '+=0.25')
+
+  // Countdown tick
+  tl.to('#cap-cron .cr-l10', { opacity: 1, duration: 0.4 }, '+=0.35')
+  if (countdown) {
+    const ticker = { m: 18 }
+    tl.to(ticker, {
+      m: 12,
+      duration: 2,
+      ease: 'none',
+      onUpdate: () => {
+        countdown.textContent = `3d 9h ${Math.round(ticker.m)}m`
+      },
+    }, '<')
+  }
+
+  tl.to('#cap-cron .cr-l11', { opacity: 1, duration: 0.3 }, '+=0.2')
+
+  tl.to({}, { duration: 2.5 })
+  tl.to(crLines.map((s) => `#cap-cron ${s}`), {
+    opacity: 0,
+    duration: 0.5,
+    ease: 'power2.in',
+    stagger: { amount: 0.25, from: 'start' },
+    onComplete: () => {
+      if (typed1) typed1.textContent = ''
+      if (typed2) typed2.textContent = ''
+      if (countdown) countdown.textContent = '3d 9h 18m'
+    },
+  })
+
+  ScrollTrigger.create({
+    trigger: '#cap-showcase',
+    start: 'top 85%',
+    end: 'bottom 10%',
+    onEnter: () => tl.play(),
+    onEnterBack: () => tl.play(),
+    onLeave: () => tl.pause(),
+    onLeaveBack: () => tl.pause(),
+  })
+}
+
+// --- Capabilities showcase: floating WhatsApp notification ---
+function initCapMsgAnimation() {
+  const msg = document.getElementById('cap-msg-wrap')
+  if (!msg) return
+
+  gsap.set(msg, { opacity: 0, y: 18, scale: 0.96 })
+  gsap.set('#cap-msg .msg-arrow', { x: 0 })
+
+  ScrollTrigger.create({
+    trigger: '#cap-showcase',
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.to(msg, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.9,
+        delay: 0.6,
+        ease: 'power3.out',
+      })
+    },
+  })
+
+  // Gentle float loop
+  gsap.to(msg, {
+    y: -8,
+    duration: 2.4,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut',
+    delay: 1.8,
+  })
+
+  // Arrow nudge
+  gsap.to('#cap-msg .msg-arrow', {
+    x: 4,
+    duration: 1.1,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut',
+  })
+}
+
+initCapPhoneAnimation()
+initCapCliAnimation()
+initCapCronAnimation()
+initCapMsgAnimation()
+
 // --- Noise grain overlay ---
 const noiseCanvas = document.getElementById('noise-canvas') as HTMLCanvasElement
 if (noiseCanvas) {
