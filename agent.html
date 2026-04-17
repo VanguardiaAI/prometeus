@@ -186,16 +186,8 @@
         <span class="section-label">III. Architecture</span>
         <h2>An agent, not a copilot.</h2>
       </header>
-      <div class="arch-grid">
-        <dl class="arch-spec">
-          <div><dt>Runtime</dt><dd>Docker &middot; bare&#8209;metal</dd></div>
-          <div><dt>Memory</dt><dd>Vector + relational</dd></div>
-          <div><dt>Skills</dt><dd>Auto&#8209;generated MCP</dd></div>
-          <div><dt>Models</dt><dd>Anthropic &middot; OpenAI &middot; local</dd></div>
-          <div><dt>Gateway</dt><dd>Multi&#8209;channel bus</dd></div>
-          <div><dt>Scheduler</dt><dd>Natural&#8209;language cron</dd></div>
-        </dl>
-        <div class="arch-copy">
+      <div class="arch-layout">
+        <aside class="arch-copy">
           <p>
             A copilot waits for your prompt. <em>Prometeus runs on its own</em> &mdash;
             a persistent process that watches, remembers, and acts. It receives
@@ -203,7 +195,225 @@
             channel you inhabit.
           </p>
           <p>No editor lock&#8209;in. No vendor lock&#8209;in. No forgetting.</p>
-        </div>
+          <dl class="arch-spec">
+            <div><dt>Runtime</dt><dd>Docker &middot; bare&#8209;metal</dd></div>
+            <div><dt>Memory</dt><dd>Vector + relational</dd></div>
+            <div><dt>Skills</dt><dd>Auto&#8209;generated MCP</dd></div>
+            <div><dt>Models</dt><dd>Anthropic &middot; OpenAI &middot; local</dd></div>
+            <div><dt>Gateway</dt><dd>Multi&#8209;channel bus</dd></div>
+            <div><dt>Scheduler</dt><dd>Natural&#8209;language cron</dd></div>
+          </dl>
+        </aside>
+
+        <figure class="term-wrap" id="arch-term-wrap" aria-label="Live agent terminal demonstration">
+          <svg
+            class="term-svg"
+            id="arch-term"
+            viewBox="0 0 720 520"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="arch-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1b1917" />
+                <stop offset="100%" stop-color="#0d0c0b" />
+              </linearGradient>
+              <linearGradient id="arch-chrome" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#24211d" />
+                <stop offset="100%" stop-color="#1a1815" />
+              </linearGradient>
+              <filter id="arch-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="14" />
+                <feOffset dx="0" dy="18" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.28" /></feComponentTransfer>
+                <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="arch-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.6" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <pattern id="arch-scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+                <rect width="3" height="1" fill="rgba(255,255,255,0.015)" />
+              </pattern>
+              <clipPath id="arch-body-clip">
+                <rect x="16" y="56" width="688" height="448" />
+              </clipPath>
+            </defs>
+
+            <!-- Window body -->
+            <rect x="16" y="16" width="688" height="488" rx="12" fill="url(#arch-bg)" filter="url(#arch-shadow)" />
+
+            <!-- Chrome / title bar -->
+            <path d="M16 28 A12 12 0 0 1 28 16 L692 16 A12 12 0 0 1 704 28 L704 56 L16 56 Z" fill="url(#arch-chrome)" />
+            <line x1="16" y1="56" x2="704" y2="56" stroke="rgba(212,165,116,0.12)" stroke-width="0.5" />
+
+            <!-- Traffic lights -->
+            <circle cx="38" cy="36" r="5.5" fill="#ff5f57" />
+            <circle cx="56" cy="36" r="5.5" fill="#febc2e" />
+            <circle cx="74" cy="36" r="5.5" fill="#28c841" />
+
+            <!-- Title -->
+            <text x="360" y="40" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="10.5" letter-spacing="1.6" fill="rgba(255,255,255,0.42)">
+              prometeus<tspan fill="rgba(212,165,116,0.55)">@</tspan>gateway &#8212; agent live
+            </text>
+
+            <!-- Status LED -->
+            <g transform="translate(676 36)">
+              <circle r="3.5" fill="#28c841">
+                <animate attributeName="opacity" values="1;0.35;1" dur="2.2s" repeatCount="indefinite" />
+              </circle>
+              <circle r="6" fill="none" stroke="#28c841" stroke-opacity="0.35">
+                <animate attributeName="r" values="4;10;4" dur="2.2s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.45;0;0.45" dur="2.2s" repeatCount="indefinite" />
+              </circle>
+            </g>
+
+            <!-- Body scanlines -->
+            <rect x="16" y="56" width="688" height="448" fill="url(#arch-scan)" />
+
+            <!-- Terminal body (clipped) -->
+            <g clip-path="url(#arch-body-clip)" font-family="'Geist Mono', ui-monospace, monospace">
+              <!-- Line 01 — prompt + command -->
+              <g class="a-line a-l1">
+                <text x="36" y="92" font-size="13">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="rgba(255,255,255,0.4)" dx="6">~/prometeus</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <text x="172" y="92" font-size="13" fill="rgba(255,255,255,0.92)" class="a-typed a-typed-1">prometeus status</text>
+              </g>
+
+              <!-- Divider -->
+              <line class="a-line a-l2" x1="36" y1="108" x2="684" y2="108" stroke="rgba(212,165,116,0.2)" stroke-dasharray="2 4" />
+
+              <!-- Status lines -->
+              <g class="a-line a-l3">
+                <text x="36" y="132" font-size="12.5">
+                  <tspan fill="#28c841">[&#10003;]</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.85)">memory</tspan>
+                  <tspan dx="28" fill="rgba(255,255,255,0.78)">loaded</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.4)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.72)">1,247 entries</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.4)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.72)">89.3 MB</tspan>
+                </text>
+              </g>
+              <g class="a-line a-l4">
+                <text x="36" y="154" font-size="12.5">
+                  <tspan fill="#28c841">[&#10003;]</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.85)">skills</tspan>
+                  <tspan dx="36" fill="rgba(255,255,255,0.78)">23 registered</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.4)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.72)">7 self&#8209;written</tspan>
+                </text>
+              </g>
+              <g class="a-line a-l5">
+                <text x="36" y="176" font-size="12.5">
+                  <tspan fill="#28c841">[&#10003;]</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.85)">models</tspan>
+                  <tspan dx="34" fill="rgba(255,255,255,0.72)">opus&#8209;4.7</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.4)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.72)">sonnet&#8209;4.6</tspan>
+                  <tspan dx="10" fill="rgba(255,255,255,0.4)">&middot;</tspan>
+                  <tspan dx="6" fill="rgba(255,255,255,0.72)">local</tspan>
+                </text>
+              </g>
+              <g class="a-line a-l6">
+                <text x="36" y="198" font-size="12.5">
+                  <tspan fill="#28c841">[&#10003;]</tspan>
+                  <tspan dx="10" fill="rgba(212,165,116,0.85)">gateway</tspan>
+                  <tspan dx="26" fill="rgba(255,255,255,0.78)">9 channels online</tspan>
+                </text>
+              </g>
+
+              <!-- Channel badges -->
+              <g class="a-line a-l7" transform="translate(36 218)">
+                <g transform="translate(0 0)"><rect width="64" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="32" y="14" text-anchor="middle" font-size="10" fill="#D4A574">telegram</text></g>
+                <g transform="translate(70 0)"><rect width="58" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="29" y="14" text-anchor="middle" font-size="10" fill="#D4A574">discord</text></g>
+                <g transform="translate(134 0)"><rect width="44" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="22" y="14" text-anchor="middle" font-size="10" fill="#D4A574">slack</text></g>
+                <g transform="translate(184 0)"><rect width="64" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="32" y="14" text-anchor="middle" font-size="10" fill="#D4A574">whatsapp</text></g>
+                <g transform="translate(254 0)"><rect width="44" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="22" y="14" text-anchor="middle" font-size="10" fill="#D4A574">email</text></g>
+                <g transform="translate(304 0)"><rect width="30" height="20" rx="4" fill="rgba(212,165,116,0.12)" stroke="rgba(212,165,116,0.3)" stroke-width="0.5" /><text x="15" y="14" text-anchor="middle" font-size="10" fill="#D4A574">cli</text></g>
+                <g transform="translate(340 0)"><rect width="56" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="0.5" /><text x="28" y="14" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.55)">+ 3 more</text></g>
+              </g>
+
+              <!-- Incoming -->
+              <g class="a-line a-l8">
+                <text x="36" y="264" font-size="12.5">
+                  <tspan fill="#D4A574">&#8594;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.55)">recv</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.4)">telegram@pablo</tspan>
+                </text>
+                <text x="54" y="284" font-size="12.5" fill="rgba(255,255,255,0.85)" font-style="italic">&ldquo;daily briefing at 8am&rdquo;</text>
+              </g>
+
+              <!-- Processing -->
+              <g class="a-line a-l9">
+                <text x="36" y="312" font-size="12">
+                  <tspan fill="rgba(212,165,116,0.65)">&middot;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.55)">parsing intent</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.32)">&#8230;</tspan>
+                  <tspan dx="14" fill="rgba(255,255,255,0.4)">matched</tspan>
+                  <tspan dx="8" fill="#D4A574">scheduler.create</tspan>
+                </text>
+              </g>
+              <g class="a-line a-l10">
+                <text x="36" y="332" font-size="12">
+                  <tspan fill="rgba(212,165,116,0.65)">&middot;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.55)">writing skill</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.32)">&#8230;</tspan>
+                  <tspan dx="14" fill="rgba(255,255,255,0.4)">cron</tspan>
+                  <tspan dx="8" fill="#D4A574">0 8 * * *</tspan>
+                </text>
+              </g>
+              <g class="a-line a-l11">
+                <text x="36" y="352" font-size="12">
+                  <tspan fill="rgba(212,165,116,0.65)">&middot;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.55)">persisting to memory</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.32)">&#8230;</tspan>
+                  <tspan dx="14" fill="#28c841">ok</tspan>
+                </text>
+              </g>
+
+              <!-- Progress bar -->
+              <g class="a-line a-l12" transform="translate(36 368)">
+                <rect width="400" height="3" rx="1.5" fill="rgba(255,255,255,0.06)" />
+                <rect class="a-progress" width="0" height="3" rx="1.5" fill="#D4A574" />
+              </g>
+
+              <!-- Outgoing -->
+              <g class="a-line a-l13">
+                <text x="36" y="402" font-size="12.5">
+                  <tspan fill="#28c841">&#8592;</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.55)">send</tspan>
+                  <tspan dx="8" fill="rgba(255,255,255,0.4)">telegram@pablo</tspan>
+                </text>
+                <text x="54" y="422" font-size="12.5" fill="rgba(255,255,255,0.85)" font-style="italic">
+                  &ldquo;Scheduled
+                  <tspan fill="#28c841"> &#10003;</tspan>
+                  <tspan fill="rgba(255,255,255,0.5)"> &middot; </tspan>
+                  next run in 14h 07m&rdquo;
+                </text>
+              </g>
+
+              <!-- Final prompt with cursor -->
+              <g class="a-line a-l14">
+                <text x="36" y="462" font-size="13">
+                  <tspan fill="#D4A574">&#10148;</tspan>
+                  <tspan fill="rgba(255,255,255,0.4)" dx="6">~/prometeus</tspan>
+                  <tspan fill="#D4A574" dx="6">$</tspan>
+                </text>
+                <rect class="a-cursor" x="174" y="450" width="8" height="16" fill="#D4A574" filter="url(#arch-glow)">
+                  <animate attributeName="opacity" values="1;1;0;0" dur="1.05s" keyTimes="0;0.5;0.5;1" repeatCount="indefinite" />
+                </rect>
+              </g>
+            </g>
+
+            <!-- Subtle inner gold border on hover effect -->
+            <rect x="16.5" y="16.5" width="687" height="487" rx="11.5" fill="none" stroke="rgba(212,165,116,0.14)" stroke-width="0.5" pointer-events="none" />
+          </svg>
+        </figure>
       </div>
     </section>
 
@@ -213,16 +423,253 @@
         <span class="section-label">IV. Quick start</span>
         <h2>Three steps to autonomy.</h2>
       </header>
-      <pre class="qs-code"><code><span class="qs-comment"># 01 &middot; Clone the repository</span>
-<span class="qs-cmd">git</span> clone https://github.com/VanguardiaAI/prometeus
-<span class="qs-cmd">cd</span> prometeus
 
-<span class="qs-comment"># 02 &middot; Configure your keys</span>
-<span class="qs-cmd">cp</span> .env.example .env
-<span class="qs-cmd">nano</span> .env  <span class="qs-comment"># add ANTHROPIC_API_KEY, TELEGRAM_TOKEN, &hellip;</span>
+      <div class="qs-steps" aria-hidden="true">
+        <span class="qs-step" data-step="01">Clone</span>
+        <span class="qs-step-sep"></span>
+        <span class="qs-step" data-step="02">Configure</span>
+        <span class="qs-step-sep"></span>
+        <span class="qs-step" data-step="03">Launch</span>
+      </div>
 
-<span class="qs-comment"># 03 &middot; Launch the gateway</span>
-<span class="qs-cmd">docker</span> compose up -d</code></pre>
+      <figure class="term-wrap qs-term-wrap" id="qs-term-wrap" aria-label="Install terminal demonstration">
+        <svg
+          class="term-svg qs-term-svg"
+          id="qs-term"
+          viewBox="0 0 960 560"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="qs-bg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1b1917" />
+              <stop offset="100%" stop-color="#0c0b0a" />
+            </linearGradient>
+            <linearGradient id="qs-chrome" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#26231f" />
+              <stop offset="100%" stop-color="#1a1815" />
+            </linearGradient>
+            <linearGradient id="qs-progress" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#D4A574" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#D4A574" />
+            </linearGradient>
+            <filter id="qs-shadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="16" />
+              <feOffset dx="0" dy="22" />
+              <feComponentTransfer><feFuncA type="linear" slope="0.32" /></feComponentTransfer>
+              <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+            <filter id="qs-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.6" result="b" />
+              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+            <filter id="qs-pulse" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="b" />
+              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+            <pattern id="qs-scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+              <rect width="3" height="1" fill="rgba(255,255,255,0.015)" />
+            </pattern>
+            <clipPath id="qs-body-clip">
+              <rect x="20" y="64" width="920" height="480" />
+            </clipPath>
+          </defs>
+
+          <!-- Window -->
+          <rect x="20" y="20" width="920" height="524" rx="12" fill="url(#qs-bg)" filter="url(#qs-shadow)" />
+
+          <!-- Chrome -->
+          <path d="M20 32 A12 12 0 0 1 32 20 L928 20 A12 12 0 0 1 940 32 L940 64 L20 64 Z" fill="url(#qs-chrome)" />
+          <line x1="20" y1="64" x2="940" y2="64" stroke="rgba(212,165,116,0.12)" stroke-width="0.5" />
+
+          <!-- Traffic lights -->
+          <circle cx="42" cy="42" r="5.5" fill="#ff5f57" />
+          <circle cx="60" cy="42" r="5.5" fill="#febc2e" />
+          <circle cx="78" cy="42" r="5.5" fill="#28c841" />
+
+          <!-- Title -->
+          <text x="480" y="46" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="11" letter-spacing="1.6" fill="rgba(255,255,255,0.42)">
+            pablo<tspan fill="rgba(212,165,116,0.55)">@</tspan>workstation &#8212; zsh
+          </text>
+
+          <!-- Tab -->
+          <g transform="translate(820 32)">
+            <rect width="104" height="22" rx="4" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="0.5" />
+            <circle cx="12" cy="11" r="2.5" fill="#28c841">
+              <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+            </circle>
+            <text x="58" y="15" text-anchor="middle" font-family="'Geist Mono', ui-monospace, monospace" font-size="10" fill="rgba(255,255,255,0.6)">~/prometeus</text>
+          </g>
+
+          <!-- Scan overlay -->
+          <rect x="20" y="64" width="920" height="480" fill="url(#qs-scan)" />
+
+          <!-- Body -->
+          <g clip-path="url(#qs-body-clip)" font-family="'Geist Mono', ui-monospace, monospace">
+            <!-- 01 · Clone -->
+            <text x="40" y="96" font-size="11" fill="rgba(212,165,116,0.6)" letter-spacing="1.2">&#47;&#47; 01 &#183; CLONE</text>
+
+            <g class="q-line q-l1">
+              <text x="40" y="120" font-size="13">
+                <tspan fill="#D4A574">&#10148;</tspan>
+                <tspan fill="#D4A574" dx="6">$</tspan>
+              </text>
+              <text x="68" y="120" font-size="13" fill="rgba(255,255,255,0.92)" class="q-typed q-typed-1">git clone https://github.com/VanguardiaAI/prometeus</text>
+            </g>
+
+            <g class="q-line q-l2">
+              <text x="40" y="142" font-size="12" fill="rgba(255,255,255,0.55)">Cloning into <tspan fill="rgba(212,165,116,0.85)">'prometeus'</tspan>&#8230;</text>
+            </g>
+
+            <!-- Clone progress 1 -->
+            <g class="q-line q-l3" transform="translate(40 156)">
+              <text x="0" y="10" font-size="11" fill="rgba(255,255,255,0.55)">remote: Enumerating objects</text>
+              <rect x="200" y="2" width="220" height="8" rx="2" fill="rgba(255,255,255,0.05)" />
+              <rect class="q-bar q-bar-1" x="200" y="2" width="0" height="8" rx="2" fill="url(#qs-progress)" />
+              <text class="q-bar-label q-bar-label-1" x="432" y="10" font-size="11" fill="rgba(212,165,116,0.9)">0%</text>
+            </g>
+            <g class="q-line q-l4" transform="translate(40 174)">
+              <text x="0" y="10" font-size="11" fill="rgba(255,255,255,0.55)">Receiving objects</text>
+              <rect x="200" y="2" width="220" height="8" rx="2" fill="rgba(255,255,255,0.05)" />
+              <rect class="q-bar q-bar-2" x="200" y="2" width="0" height="8" rx="2" fill="url(#qs-progress)" />
+              <text class="q-bar-label q-bar-label-2" x="432" y="10" font-size="11" fill="rgba(212,165,116,0.9)">0 / 1,247</text>
+            </g>
+            <g class="q-line q-l5" transform="translate(40 192)">
+              <text x="0" y="10" font-size="11" fill="rgba(255,255,255,0.55)">Resolving deltas</text>
+              <rect x="200" y="2" width="220" height="8" rx="2" fill="rgba(255,255,255,0.05)" />
+              <rect class="q-bar q-bar-3" x="200" y="2" width="0" height="8" rx="2" fill="url(#qs-progress)" />
+              <text class="q-bar-label q-bar-label-3" x="432" y="10" font-size="11" fill="rgba(212,165,116,0.9)">0 / 842</text>
+            </g>
+
+            <g class="q-line q-l6">
+              <text x="40" y="224" font-size="12">
+                <tspan fill="#28c841">&#10003;</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.7)">done in</tspan>
+                <tspan dx="6" fill="#D4A574">2.3s</tspan>
+              </text>
+            </g>
+
+            <!-- 02 · Configure -->
+            <text x="40" y="260" font-size="11" fill="rgba(212,165,116,0.6)" letter-spacing="1.2" class="q-line q-l7">&#47;&#47; 02 &#183; CONFIGURE</text>
+
+            <g class="q-line q-l8">
+              <text x="40" y="284" font-size="13">
+                <tspan fill="#D4A574">&#10148;</tspan>
+                <tspan fill="#D4A574" dx="6">$</tspan>
+              </text>
+              <text x="68" y="284" font-size="13" fill="rgba(255,255,255,0.92)" class="q-typed q-typed-2">cd prometeus &amp;&amp; cp .env.example .env</text>
+            </g>
+
+            <g class="q-line q-l9">
+              <text x="40" y="308" font-size="13">
+                <tspan fill="#D4A574">&#10148;</tspan>
+                <tspan fill="#D4A574" dx="6">$</tspan>
+              </text>
+              <text x="68" y="308" font-size="13">
+                <tspan fill="rgba(255,255,255,0.92)">nano .env</tspan>
+                <tspan fill="rgba(255,255,255,0.35)" dx="10">&#35; ANTHROPIC_API_KEY, TELEGRAM_TOKEN, &hellip;</tspan>
+              </text>
+            </g>
+
+            <!-- env preview box -->
+            <g class="q-line q-l10" transform="translate(40 326)">
+              <rect width="560" height="54" rx="4" fill="rgba(212,165,116,0.04)" stroke="rgba(212,165,116,0.2)" stroke-width="0.5" />
+              <text x="12" y="18" font-size="10.5" fill="rgba(255,255,255,0.35)">.env</text>
+              <text x="12" y="34" font-size="11" fill="rgba(255,255,255,0.75)">
+                <tspan fill="rgba(212,165,116,0.85)">ANTHROPIC_API_KEY</tspan>
+                <tspan fill="rgba(255,255,255,0.35)">=</tspan>
+                <tspan fill="rgba(255,255,255,0.75)">sk&#8209;ant&#8209;***&#8230;</tspan>
+              </text>
+              <text x="12" y="48" font-size="11" fill="rgba(255,255,255,0.75)">
+                <tspan fill="rgba(212,165,116,0.85)">TELEGRAM_TOKEN</tspan>
+                <tspan fill="rgba(255,255,255,0.35)">=</tspan>
+                <tspan fill="rgba(255,255,255,0.75)">7421:AA***E&hellip;</tspan>
+              </text>
+            </g>
+
+            <!-- 03 · Launch -->
+            <text x="40" y="412" font-size="11" fill="rgba(212,165,116,0.6)" letter-spacing="1.2" class="q-line q-l11">&#47;&#47; 03 &#183; LAUNCH</text>
+
+            <g class="q-line q-l12">
+              <text x="40" y="436" font-size="13">
+                <tspan fill="#D4A574">&#10148;</tspan>
+                <tspan fill="#D4A574" dx="6">$</tspan>
+              </text>
+              <text x="68" y="436" font-size="13" fill="rgba(255,255,255,0.92)" class="q-typed q-typed-4">docker compose up -d</text>
+            </g>
+
+            <!-- Container list -->
+            <g class="q-line q-l13"><text x="40" y="460" font-size="11.5" fill="rgba(255,255,255,0.55)">[+] Running 4&#47;4</text></g>
+
+            <g class="q-line q-l14">
+              <text x="40" y="480" font-size="12">
+                <tspan fill="#28c841">&#10003;</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.75)">Container</tspan>
+                <tspan dx="6" fill="#D4A574">prometeus&#8209;db</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.55)">Started</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.4)">0.4s</tspan>
+              </text>
+            </g>
+            <g class="q-line q-l15">
+              <text x="40" y="500" font-size="12">
+                <tspan fill="#28c841">&#10003;</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.75)">Container</tspan>
+                <tspan dx="6" fill="#D4A574">prometeus&#8209;vector</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.55)">Started</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.4)">0.6s</tspan>
+              </text>
+            </g>
+            <g class="q-line q-l16">
+              <text x="40" y="520" font-size="12">
+                <tspan fill="#28c841">&#10003;</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.75)">Container</tspan>
+                <tspan dx="6" fill="#D4A574">prometeus&#8209;agent</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.55)">Started</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.4)">1.2s</tspan>
+              </text>
+            </g>
+            <g class="q-line q-l17">
+              <text x="40" y="540" font-size="12">
+                <tspan fill="#28c841">&#10003;</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.75)">Container</tspan>
+                <tspan dx="6" fill="#D4A574">prometeus&#8209;gateway</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.55)">Started</tspan>
+                <tspan dx="8" fill="rgba(255,255,255,0.4)">1.8s</tspan>
+              </text>
+            </g>
+
+            <!-- Live banner -->
+            <g class="q-line q-l18" transform="translate(600 440)">
+              <rect width="320" height="86" rx="6" fill="rgba(212,165,116,0.05)" stroke="rgba(212,165,116,0.35)" stroke-width="0.75" />
+              <g transform="translate(18 24)">
+                <circle r="5" fill="#28c841" filter="url(#qs-pulse)">
+                  <animate attributeName="opacity" values="1;0.5;1" dur="1.6s" repeatCount="indefinite" />
+                </circle>
+                <circle r="10" fill="none" stroke="#28c841" stroke-opacity="0.4">
+                  <animate attributeName="r" values="5;14;5" dur="1.6s" repeatCount="indefinite" />
+                  <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite" />
+                </circle>
+              </g>
+              <text x="40" y="30" font-size="12" letter-spacing="2" fill="rgba(212,165,116,0.9)">GATEWAY LIVE</text>
+              <text x="18" y="54" font-size="12" fill="rgba(255,255,255,0.75)">
+                <tspan fill="rgba(255,255,255,0.4)">url</tspan>
+                <tspan dx="10" fill="rgba(255,255,255,0.9)">http://localhost:8080</tspan>
+              </text>
+              <text x="18" y="72" font-size="11" fill="rgba(255,255,255,0.5)">
+                <tspan fill="rgba(255,255,255,0.35)">uptime</tspan>
+                <tspan dx="10" class="q-uptime">00:00:02</tspan>
+                <tspan dx="14" fill="rgba(255,255,255,0.35)">pid</tspan>
+                <tspan dx="10" fill="rgba(255,255,255,0.65)">41829</tspan>
+              </text>
+            </g>
+          </g>
+
+          <!-- Inner subtle border -->
+          <rect x="20.5" y="20.5" width="919" height="523" rx="11.5" fill="none" stroke="rgba(212,165,116,0.14)" stroke-width="0.5" pointer-events="none" />
+        </svg>
+      </figure>
+
       <div class="qs-cta-row">
         <a
           href="https://github.com/VanguardiaAI/prometeus"

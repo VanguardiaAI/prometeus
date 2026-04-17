@@ -347,9 +347,264 @@ revealOnScroll('.integrations .section-head', { y: 20 })
 revealOnScroll('.architecture .section-head', { y: 20 })
 revealOnScroll('.arch-spec > div', { stagger: 0.06, y: 16 })
 revealOnScroll('.arch-copy p', { stagger: 0.1, y: 16 })
+revealOnScroll('#arch-term-wrap', { y: 24 })
 revealOnScroll('.quickstart .section-head', { y: 20 })
-revealOnScroll('.qs-code', { y: 24 })
+revealOnScroll('.qs-steps', { y: 16 })
+revealOnScroll('#qs-term-wrap', { y: 24 })
 revealOnScroll('.qs-cta-row', { y: 16, delay: 0.1 })
+
+// --- Typewriter helper for SVG <text> elements ---
+function typewrite(target: string, finalText: string): gsap.core.Tween {
+  const el = document.querySelector(target) as SVGTextElement | null
+  if (!el) return gsap.to({}, { duration: 0 })
+
+  const originalText = finalText
+  el.textContent = ''
+
+  const proxy = { n: 0 }
+  return gsap.to(proxy, {
+    n: originalText.length,
+    duration: Math.max(0.35, originalText.length * 0.025),
+    ease: 'none',
+    onUpdate: () => {
+      const len = Math.floor(proxy.n)
+      el.textContent = originalText.slice(0, len)
+    },
+    onComplete: () => {
+      el.textContent = originalText
+    },
+  })
+}
+
+// --- Architecture terminal animation ---
+function initArchTerminalAnimation() {
+  const term = document.getElementById('arch-term')
+  if (!term) return
+
+  const archCmd = 'prometeus status'
+  const typedEl = term.querySelector('.a-typed-1') as SVGTextElement | null
+  if (typedEl) typedEl.textContent = ''
+
+  const lines = [
+    '.a-l1', '.a-l2', '.a-l3', '.a-l4', '.a-l5', '.a-l6', '.a-l7',
+    '.a-l8', '.a-l9', '.a-l10', '.a-l11', '.a-l12', '.a-l13', '.a-l14',
+  ]
+  lines.forEach((sel) => gsap.set(`#arch-term ${sel}`, { opacity: 0 }))
+  gsap.set('#arch-term .a-progress', { attr: { width: 0 } })
+
+  const tl = gsap.timeline({
+    paused: true,
+    repeat: -1,
+    repeatDelay: 3.2,
+    defaults: { ease: 'power2.out' },
+  })
+
+  // Prompt appears, command types
+  tl.to('#arch-term .a-l1', { opacity: 1, duration: 0.35 })
+    .add(typewrite('#arch-term .a-typed-1', archCmd), '>')
+    .to('#arch-term .a-l2', { opacity: 1, duration: 0.35 }, '+=0.15')
+
+  // Status lines stagger in
+  tl.to(
+    ['#arch-term .a-l3', '#arch-term .a-l4', '#arch-term .a-l5', '#arch-term .a-l6'],
+    { opacity: 1, duration: 0.3, stagger: 0.14 },
+    '+=0.05',
+  )
+
+  // Channel badges
+  tl.to('#arch-term .a-l7', { opacity: 1, duration: 0.4 }, '+=0.1')
+
+  // Incoming message
+  tl.to('#arch-term .a-l8', { opacity: 1, duration: 0.35 }, '+=0.3')
+
+  // Processing lines + progress bar
+  tl.to('#arch-term .a-l9', { opacity: 1, duration: 0.32 }, '+=0.2')
+    .to('#arch-term .a-l10', { opacity: 1, duration: 0.32 }, '+=0.15')
+    .to('#arch-term .a-l11', { opacity: 1, duration: 0.32 }, '+=0.15')
+    .to('#arch-term .a-l12', { opacity: 1, duration: 0.25 }, '<')
+    .to('#arch-term .a-progress', { attr: { width: 400 }, duration: 1.1, ease: 'power1.inOut' }, '<0.1')
+
+  // Outgoing + final prompt
+  tl.to('#arch-term .a-l13', { opacity: 1, duration: 0.4 }, '+=0.2')
+    .to('#arch-term .a-l14', { opacity: 1, duration: 0.35 }, '+=0.35')
+
+  // Hold, then fade out for next loop
+  tl.to({}, { duration: 1.4 })
+  tl.to(
+    lines.map((s) => `#arch-term ${s}`),
+    {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.in',
+      stagger: { amount: 0.25, from: 'start' },
+      onComplete: () => {
+        if (typedEl) typedEl.textContent = ''
+        gsap.set('#arch-term .a-progress', { attr: { width: 0 } })
+      },
+    },
+  )
+
+  ScrollTrigger.create({
+    trigger: '#arch-term-wrap',
+    start: 'top 80%',
+    end: 'bottom 10%',
+    onEnter: () => tl.play(),
+    onEnterBack: () => tl.play(),
+    onLeave: () => tl.pause(),
+    onLeaveBack: () => tl.pause(),
+  })
+}
+
+// --- Quick Start terminal animation ---
+function initQuickStartTerminalAnimation() {
+  const term = document.getElementById('qs-term')
+  if (!term) return
+
+  const qLines = [
+    '.q-l1', '.q-l2', '.q-l3', '.q-l4', '.q-l5', '.q-l6',
+    '.q-l7', '.q-l8', '.q-l9', '.q-l10',
+    '.q-l11', '.q-l12', '.q-l13', '.q-l14', '.q-l15', '.q-l16', '.q-l17', '.q-l18',
+  ]
+  qLines.forEach((sel) => gsap.set(`#qs-term ${sel}`, { opacity: 0 }))
+
+  // Reset state
+  gsap.set(['#qs-term .q-bar-1', '#qs-term .q-bar-2', '#qs-term .q-bar-3'], { attr: { width: 0 } })
+
+  const bar1Label = term.querySelector('.q-bar-label-1') as SVGTextElement | null
+  const bar2Label = term.querySelector('.q-bar-label-2') as SVGTextElement | null
+  const bar3Label = term.querySelector('.q-bar-label-3') as SVGTextElement | null
+  const uptimeEl = term.querySelector('.q-uptime') as SVGTextElement | null
+
+  // Clear typed targets
+  term.querySelectorAll<SVGTextElement>('.q-typed').forEach((el) => (el.textContent = ''))
+
+  const steps = document.querySelectorAll<HTMLElement>('.qs-step')
+  const setActiveStep = (i: number) => {
+    steps.forEach((el, idx) => el.classList.toggle('is-active', idx === i))
+  }
+
+  const tl = gsap.timeline({
+    paused: true,
+    repeat: -1,
+    repeatDelay: 3.5,
+    defaults: { ease: 'power2.out' },
+  })
+
+  // STEP 01 — CLONE
+  tl.call(() => setActiveStep(0))
+  tl.to('#qs-term .q-l1', { opacity: 1, duration: 0.35 })
+    .add(typewrite('#qs-term .q-typed-1', 'git clone https://github.com/VanguardiaAI/prometeus'), '>')
+    .to('#qs-term .q-l2', { opacity: 1, duration: 0.35 }, '+=0.25')
+
+  // Progress bars — show lines then animate fills with counters
+  tl.to('#qs-term .q-l3', { opacity: 1, duration: 0.35 }, '+=0.15')
+  const barProxy1 = { p: 0 }
+  tl.to(barProxy1, {
+    p: 1,
+    duration: 0.9,
+    ease: 'power1.inOut',
+    onUpdate: () => {
+      gsap.set('#qs-term .q-bar-1', { attr: { width: 220 * barProxy1.p } })
+      if (bar1Label) bar1Label.textContent = `${Math.round(barProxy1.p * 100)}%`
+    },
+  }, '<')
+
+  tl.to('#qs-term .q-l4', { opacity: 1, duration: 0.35 }, '+=0.08')
+  const barProxy2 = { p: 0 }
+  tl.to(barProxy2, {
+    p: 1,
+    duration: 1.1,
+    ease: 'power1.inOut',
+    onUpdate: () => {
+      gsap.set('#qs-term .q-bar-2', { attr: { width: 220 * barProxy2.p } })
+      if (bar2Label) bar2Label.textContent = `${Math.round(barProxy2.p * 1247).toLocaleString()} / 1,247`
+    },
+  }, '<')
+
+  tl.to('#qs-term .q-l5', { opacity: 1, duration: 0.35 }, '+=0.08')
+  const barProxy3 = { p: 0 }
+  tl.to(barProxy3, {
+    p: 1,
+    duration: 0.75,
+    ease: 'power1.inOut',
+    onUpdate: () => {
+      gsap.set('#qs-term .q-bar-3', { attr: { width: 220 * barProxy3.p } })
+      if (bar3Label) bar3Label.textContent = `${Math.round(barProxy3.p * 842)} / 842`
+    },
+  }, '<')
+
+  tl.to('#qs-term .q-l6', { opacity: 1, duration: 0.4 }, '+=0.2')
+
+  // STEP 02 — CONFIGURE
+  tl.call(() => setActiveStep(1))
+  tl.to('#qs-term .q-l7', { opacity: 1, duration: 0.35 }, '+=0.25')
+  tl.to('#qs-term .q-l8', { opacity: 1, duration: 0.35 }, '+=0.1')
+    .add(typewrite('#qs-term .q-typed-2', 'cd prometeus && cp .env.example .env'), '>')
+
+  tl.to('#qs-term .q-l9', { opacity: 1, duration: 0.5 }, '+=0.3')
+  tl.to('#qs-term .q-l10', { opacity: 1, duration: 0.4 }, '+=0.2')
+
+  // STEP 03 — LAUNCH
+  tl.call(() => setActiveStep(2))
+  tl.to('#qs-term .q-l11', { opacity: 1, duration: 0.35 }, '+=0.3')
+  tl.to('#qs-term .q-l12', { opacity: 1, duration: 0.35 }, '+=0.1')
+    .add(typewrite('#qs-term .q-typed-4', 'docker compose up -d'), '>')
+
+  tl.to('#qs-term .q-l13', { opacity: 1, duration: 0.35 }, '+=0.25')
+  tl.to(
+    ['#qs-term .q-l14', '#qs-term .q-l15', '#qs-term .q-l16', '#qs-term .q-l17'],
+    { opacity: 1, duration: 0.3, stagger: 0.22 },
+    '+=0.1',
+  )
+
+  // Live banner + uptime ticker
+  tl.to('#qs-term .q-l18', { opacity: 1, duration: 0.6, ease: 'power3.out' }, '+=0.25')
+
+  const uptimeProxy = { s: 0 }
+  tl.to(uptimeProxy, {
+    s: 14,
+    duration: 2.5,
+    ease: 'none',
+    onUpdate: () => {
+      if (!uptimeEl) return
+      const total = Math.floor(uptimeProxy.s)
+      const hh = '00'
+      const mm = '00'
+      const ss = String(total).padStart(2, '0')
+      uptimeEl.textContent = `${hh}:${mm}:${ss}`
+    },
+  }, '<0.3')
+
+  // Hold, fade out, then reset
+  tl.to({}, { duration: 2 })
+  tl.to(qLines.map((s) => `#qs-term ${s}`), {
+    opacity: 0,
+    duration: 0.6,
+    ease: 'power2.in',
+    stagger: { amount: 0.3, from: 'start' },
+    onComplete: () => {
+      setActiveStep(-1)
+      term.querySelectorAll<SVGTextElement>('.q-typed').forEach((el) => (el.textContent = ''))
+      if (bar1Label) bar1Label.textContent = '0%'
+      if (bar2Label) bar2Label.textContent = '0 / 1,247'
+      if (bar3Label) bar3Label.textContent = '0 / 842'
+      gsap.set(['#qs-term .q-bar-1', '#qs-term .q-bar-2', '#qs-term .q-bar-3'], { attr: { width: 0 } })
+    },
+  })
+
+  ScrollTrigger.create({
+    trigger: '#qs-term-wrap',
+    start: 'top 80%',
+    end: 'bottom 10%',
+    onEnter: () => tl.play(),
+    onEnterBack: () => tl.play(),
+    onLeave: () => tl.pause(),
+    onLeaveBack: () => tl.pause(),
+  })
+}
+
+initArchTerminalAnimation()
+initQuickStartTerminalAnimation()
 
 // --- Noise grain overlay ---
 const noiseCanvas = document.getElementById('noise-canvas') as HTMLCanvasElement

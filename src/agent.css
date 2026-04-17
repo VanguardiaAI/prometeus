@@ -451,53 +451,22 @@ img {
   z-index: 5;
 }
 
-.arch-grid {
-  max-width: 1200px;
+.arch-layout {
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 4rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(420px, 1.15fr);
+  gap: 5rem;
   align-items: start;
-}
-
-.arch-spec {
-  display: grid;
-  grid-template-columns: 1fr;
-  border-top: 1px solid var(--fg-faint);
-}
-
-.arch-spec > div {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--fg-faint);
-  align-items: baseline;
-}
-
-.arch-spec dt {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
-
-.arch-spec dd {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--fg);
-  letter-spacing: 0.01em;
 }
 
 .arch-copy {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: sticky;
+  top: 6rem;
 }
 
 .arch-copy p {
@@ -515,6 +484,87 @@ img {
   color: var(--gold);
 }
 
+.arch-spec {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--fg-faint);
+  margin-top: 1.5rem;
+}
+
+.arch-spec > div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--fg-faint);
+  align-items: baseline;
+}
+
+.arch-spec dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.arch-spec dd {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: 0.01em;
+}
+
+/* ========================================
+   TERMINAL (shared)
+   ======================================== */
+.term-wrap {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.term-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -40px -20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 165, 116, 0.18) 0%,
+    transparent 60%
+  );
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.term-svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 1;
+  overflow: visible;
+}
+
+.term-svg .a-line,
+.term-svg .q-line {
+  opacity: 0;
+}
+
+.term-svg text {
+  user-select: none;
+}
+
+.term-svg .a-progress,
+.term-svg .q-bar {
+  transform-origin: left center;
+}
+
 /* ========================================
    QUICK START
    ======================================== */
@@ -525,37 +575,61 @@ img {
   z-index: 5;
 }
 
-.qs-code {
+.qs-steps {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 2.5rem 3rem;
-  background: var(--fg);
-  border-radius: 6px;
-  overflow-x: auto;
-  box-shadow: 0 30px 80px -20px rgba(23, 23, 23, 0.35);
-}
-
-.qs-code code {
+  margin: -2rem auto 3rem;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
-  line-height: 2;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.3px;
-  white-space: pre;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--fg-muted);
 }
 
-.qs-comment {
-  color: rgba(255, 255, 255, 0.4);
+.qs-step {
+  position: relative;
+  padding-left: 2.4rem;
+  transition: color 0.3s ease;
+}
+
+.qs-step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
   font-style: italic;
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  color: var(--gold);
+  text-transform: none;
 }
 
-.qs-cmd {
-  color: var(--gold);
+.qs-step.is-active {
+  color: var(--fg);
+}
+
+.qs-step-sep {
+  width: 44px;
+  height: 1px;
+  background: var(--fg-faint);
+}
+
+.qs-term-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
 }
 
 .qs-cta-row {
   max-width: 1000px;
-  margin: 3rem auto 0;
+  margin: 4rem auto 0;
   padding: 0 3rem;
   display: flex;
   align-items: center;
@@ -822,19 +896,30 @@ img {
     min-height: auto;
   }
 
-  .arch-grid {
+  .arch-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
     padding: 0 2rem;
   }
 
-  .qs-code {
-    margin: 0 1.5rem;
-    padding: 1.5rem 1.5rem;
+  .arch-copy {
+    position: static;
+    top: auto;
   }
 
-  .qs-code code {
-    font-size: 0.8rem;
+  .qs-term-wrap {
+    padding: 0 1.5rem;
+  }
+
+  .qs-steps {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .qs-step-sep {
+    width: 24px;
   }
 
   .qs-cta-row {
