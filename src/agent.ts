@@ -13,17 +13,16 @@ const transitionOverlay = document.getElementById('page-transition-overlay') as 
 
 if (transitionOverlay && sessionStorage.getItem('prometeus-transition')) {
   sessionStorage.removeItem('prometeus-transition')
-
-  // Start fully white (no transition so it's instant)
   transitionOverlay.classList.add('active')
+}
 
-  // After a frame, remove .active — the CSS transition kicks in and fades to 0
-  requestAnimationFrame(() => {
+// Defer all heavy initialization so the browser can paint the white overlay before any JS blocks it.
+requestAnimationFrame(() => {
+  if (transitionOverlay) {
     requestAnimationFrame(() => {
       transitionOverlay.classList.remove('active')
     })
-  })
-}
+  }
 
 // --- Lenis smooth scroll ---
 const lenis = new Lenis()
@@ -857,3 +856,5 @@ const noiseCanvas = document.getElementById('noise-canvas') as HTMLCanvasElement
 if (noiseCanvas) {
   initNoise(noiseCanvas, { size: 512, alpha: 15, refreshInterval: 3 })
 }
+
+}) // end requestAnimationFrame — heavy initialization deferred to unblock first paint
