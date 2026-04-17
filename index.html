@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prometeus — Stealing fire from the gods</title>
+    <meta name="description" content="An autonomous agent that remembers, learns, and evolves. Persistent memory, self-improving skills, and a multi-platform gateway. Open-source. Your infrastructure." />
+    <meta name="theme-color" content="#0A0A0A" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Prometeus — Stealing fire from the gods" />
+    <meta property="og:description" content="An autonomous agent that remembers, learns, and evolves. Open-source. Your infrastructure." />
+    <meta property="og:image" content="/images/flash_hero.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prometeus — Stealing fire from the gods" />
+    <meta name="twitter:description" content="An autonomous agent that remembers, learns, and evolves. Open-source. Your infrastructure." />
+    <meta name="twitter:image" content="/images/flash_hero.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-inner">
+        <span class="loader-text">PROMETEUS</span>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <span class="loader-percent">0%</span>
+      </div>
+    </div>
+
+    <!-- SCROLL-DRIVEN VIDEO SECTION -->
+    <section id="scroll-section">
+      <div id="video-container">
+        <canvas id="scroll-canvas"></canvas>
+
+        <video
+          id="loop-video"
+          src="/videos/bucle_hero.mp4"
+          muted
+          playsinline
+          loop
+          preload="auto"
+        ></video>
+
+        <!-- Flash image (shown on Begin hover) -->
+        <img id="flash-image" src="/images/flash_hero.jpg" alt="" />
+        <div id="flash-white"></div>
+
+        <!-- Scroll indicator -->
+        <div id="scroll-indicator">
+          <span>Scroll to explore</span>
+          <div class="scroll-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div id="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+
+        <!-- HERO CONTENT -->
+        <div id="hero-content">
+          <div class="hero-overlay"></div>
+          <div class="hero-text">
+            <h1 class="hero-title">Prometeus</h1>
+            <p class="hero-subtitle">Stealing fire from the gods.</p>
+            <p class="hero-body">
+              An autonomous agent that remembers, learns, and evolves.<br />
+              Persistent memory. Adaptive intelligence. Your infrastructure.
+            </p>
+            <div class="hero-cta">
+              <a href="#" class="cta-primary">Begin &rarr;</a>
+              <span class="cta-divider"></span>
+              <a href="#" class="cta-secondary">Read the docs</a>
+            </div>
+            <footer class="hero-footer">
+              <span>v0.1.0 &mdash; Open Source</span>
+              <span>40+ tools &middot; Persistent memory &middot; Multi-platform</span>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOISE OVERLAY -->
+    <canvas id="noise-canvas"></canvas>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

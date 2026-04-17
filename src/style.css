@@ -1,0 +1,414 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Monumental Editorial — Mythic */
+  --surface-inverse: #0A0A0A;
+  --fg-inverse: #FFFFFF;
+  --gold: #D4A574;
+  --gold-dim: #D4A57466;
+  --white-80: rgba(255, 255, 255, 0.8);
+  --white-40: rgba(255, 255, 255, 0.27);
+  --white-20: rgba(255, 255, 255, 0.12);
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--surface-inverse);
+  color: var(--fg-inverse);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   LOADER
+   ======================================== */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--surface-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  color: var(--fg-inverse);
+}
+
+.loader-bar {
+  width: 160px;
+  height: 1px;
+  background: var(--white-20);
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  transition: width 0.1s linear;
+}
+
+.loader-percent {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--white-40);
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   SCROLL VIDEO SECTION
+   ======================================== */
+#scroll-section {
+  height: 400vh;
+  position: relative;
+}
+
+#video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+
+#scroll-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#loop-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 2;
+}
+
+/* Flash image + white overlay (Begin hover) */
+#flash-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+#flash-white {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Scroll indicator */
+#scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--white-40);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity 0.6s ease;
+}
+
+#scroll-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-arrow {
+  animation: bounceDown 2s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Progress bar */
+#progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--white-20);
+  z-index: 20;
+}
+
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  transition: width 0.05s linear;
+}
+
+/* ========================================
+   HERO CONTENT
+   ======================================== */
+#hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+#hero-content.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center 50%,
+    rgba(10, 10, 10, 0.82) 0%,
+    rgba(10, 10, 10, 0.65) 45%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7), 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Title — editorial italic bold serif */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 11vw, 140px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  color: var(--fg-inverse);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Subtitle — italic serif in gold */
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--gold);
+  margin-top: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Body — monospace, code-project feel */
+.hero-body {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--white-80);
+  max-width: 520px;
+  margin-top: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Split-text atoms */
+.char,
+.word {
+  display: inline-block;
+  will-change: opacity, filter;
+}
+
+/* CTA — editorial text links, no buttons */
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cta-primary {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-decoration: none;
+  text-shadow: 0 0 12px var(--gold-dim), 0 0 40px var(--gold-dim);
+  animation: auraBreath 3s ease-in-out infinite;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cta-primary::before {
+  content: '';
+  position: absolute;
+  inset: -8px -16px;
+  border-radius: 6px;
+  background: radial-gradient(ellipse at center, var(--gold-dim) 0%, transparent 70%);
+  opacity: 0.4;
+  filter: blur(8px);
+  animation: auraBreath 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes auraBreath {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.cta-primary:hover {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 60px var(--gold-dim);
+}
+
+.cta-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cta-secondary {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--white-80);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.cta-secondary:hover {
+  color: var(--fg-inverse);
+}
+
+/* Footer — editorial metadata */
+.hero-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 80px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.38);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ========================================
+   NOISE OVERLAY
+   ======================================== */
+#noise-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .hero-text {
+    padding: 0 24px;
+  }
+
+  .hero-body {
+    margin-top: 32px;
+  }
+
+  .hero-cta {
+    margin-top: 32px;
+  }
+
+  .hero-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 48px;
+  }
+}
