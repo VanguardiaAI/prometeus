@@ -7,7 +7,7 @@ import { initNoise } from './noise'
 gsap.registerPlugin(ScrollTrigger)
 
 // --- Config ---
-const TOTAL_FRAMES = 150
+const TOTAL_FRAMES = 75
 const FRAME_PATH = (i: number) => `/frames/frame_${String(i).padStart(4, '0')}.jpg`
 
 // --- Elements ---
